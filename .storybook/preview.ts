@@ -49,6 +49,16 @@ const preview: Preview = {
   // descriptions each story's meta/argTypes provide), instead of requiring `tags: ['autodocs']`
   // to be repeated in every one of the 44 story files.
   tags: ['autodocs'],
+  parameters: {
+    // Root-level sidebar entries sort alphabetically by default, which would bury "Welcome" (the
+    // landing page) below every component group. Pins it first, then keeps the 3 component groups
+    // in the same order the sibling brandsync-web-components repo uses.
+    options: {
+      storySort: {
+        order: ['Welcome', 'Components', 'Genie AI Components', 'UI Shell'],
+      },
+    },
+  },
   globalTypes: {
     theme: {
       name: 'Theme',

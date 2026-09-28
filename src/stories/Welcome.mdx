@@ -1,0 +1,115 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { BsLogo, BsButton, BsBadge, BsAvatar, BsChipInformative } from '@brandsync/react';
+
+<Meta title="Welcome" />
+
+export const cardStyle = {
+  display: 'block',
+  padding: 'var(--bs-spacing-300, 20px)',
+  borderRadius: 'var(--bs-border-radius-200, 12px)',
+  border: '1px solid var(--bs-border-neutral-container, #E8EAEE)',
+  background: 'var(--bs-surface-raised, #FFFFFF)',
+  textDecoration: 'none',
+  color: 'inherit',
+  transition: 'border-color 0.15s ease, transform 0.15s ease',
+};
+
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--bs-spacing-400, 24px)',
+    padding: 'var(--bs-spacing-500, 32px)',
+    borderRadius: 'var(--bs-border-radius-300, 16px)',
+    background: 'var(--bs-surface-container, #F4F5FA)',
+    border: '1px solid var(--bs-border-neutral-container, #E8EAEE)',
+    marginBottom: 'var(--bs-spacing-500, 32px)',
+  }}
+>
+  <BsLogo variant="mark" />
+  <div>
+    <h1 style={{ margin: 0, fontSize: 32, fontWeight: 700, color: 'var(--bs-text-default, #1A1D29)' }}>
+      Brandsync React
+    </h1>
+    <p style={{ margin: '8px 0 0', fontSize: 16, lineHeight: 1.5, color: 'var(--bs-text-muted, #5B6170)', maxWidth: 620 }}>
+      React components for the BrandSync design system. Every story in this Storybook renders <code>@brandsync/react</code> installed straight from the public npm registry — never local source — so what you see here is exactly what you'd get in a real consuming app.
+    </p>
+  </div>
+</div>
+
+<div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 'var(--bs-spacing-500, 32px)' }}>
+  <BsBadge variant="primary">47 components</BsBadge>
+  <BsBadge variant="info">React 18 & 19</BsBadge>
+  <BsBadge variant="success">Installed from npm</BsBadge>
+  <BsBadge variant="neutral">Storybook 10</BsBadge>
+</div>
+
+## Getting started
+
+```bash
+npm install @brandsync/react @brandsync/wc
+```
+
+```tsx
+import { BsButton } from '@brandsync/react';
+// Every bs-* component's styling is written entirely against --bs-* design tokens, and this
+// package doesn't inject them itself -- this import is what actually makes them visible.
+import '@brandsync/wc/dist/brandsync-wc/brandsync-wc.css';
+
+export function Example() {
+  return <BsButton variant="primary">Book room</BsButton>;
+}
+```
+
+> **Don't skip the CSS import.** Skipping it is the #1 cause of a `bs-*` component rendering with
+> no visible border/background and near-zero size — with no console error to point you at why.
+> The tokens also define `Roboto` as the typeface by name, but don't load the font file itself —
+> that's the consuming app's job too (a `<link>` to Google Fonts, `next/font/google`, etc.).
+
+## Explore the library
+
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+    gap: 16,
+    marginBottom: 'var(--bs-spacing-500, 32px)',
+  }}
+>
+  <a href="?path=/docs/components-bsbutton--docs" style={cardStyle}>
+    <h3 style={{ margin: '0 0 8px', fontSize: 18 }}>Components</h3>
+    <p style={{ margin: 0, fontSize: 14, color: 'var(--bs-text-muted, #5B6170)' }}>31 general-purpose building blocks — buttons, inputs, cards, tables, navigation and more.</p>
+  </a>
+  <a href="?path=/docs/genie-ai-components-bscomposer--docs" style={cardStyle}>
+    <h3 style={{ margin: '0 0 8px', fontSize: 18 }}>Genie AI Components</h3>
+    <p style={{ margin: 0, fontSize: 14, color: 'var(--bs-text-muted, #5B6170)' }}>13 components purpose-built for the Genie AI chat panel product surface.</p>
+  </a>
+  <a href="?path=/docs/ui-shell-bsnavigationheader--docs" style={cardStyle}>
+    <h3 style={{ margin: '0 0 8px', fontSize: 18 }}>UI Shell</h3>
+    <p style={{ margin: 0, fontSize: 14, color: 'var(--bs-text-muted, #5B6170)' }}>3 components for building the app's navigation shell — drawer, drawer items, header.</p>
+  </a>
+</div>
+
+## A quick preview
+
+<div
+  style={{
+    display: 'flex',
+    gap: 16,
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: 'var(--bs-spacing-400, 24px)',
+    borderRadius: 'var(--bs-border-radius-200, 12px)',
+    background: 'var(--bs-surface-container, #F4F5FA)',
+  }}
+>
+  <BsAvatar type="initials" initials="SL" size="md" />
+  <BsButton variant="primary">Primary</BsButton>
+  <BsButton variant="outlined">Outlined</BsButton>
+  <BsBadge variant="success">Active</BsBadge>
+  <BsChipInformative color="info">Beta</BsChipInformative>
+</div>
+
+---
+
+<p style={{ fontSize: 13, color: 'var(--bs-text-muted, #5B6170)' }}>This site exists to prove <code>@brandsync/react</code> works as a real npm dependency, document the integration gotchas above, and give every exported component a working example and full prop docs — sourced directly from the underlying Stencil component JSDoc, not written from scratch.</p>
