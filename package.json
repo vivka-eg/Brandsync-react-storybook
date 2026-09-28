@@ -1,0 +1,24 @@
+{
+  "name": "brandsync-react-storybook",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Storybook showcase for @brandsync/react, consuming it as a real published npm package (not local source).",
+  "scripts": {
+    "storybook": "storybook dev -p 6007",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@brandsync/react": "^1.0.0",
+    "@brandsync/wc": "^1.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.5.8",
+    "@storybook/react-vite": "^10.5.8",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "storybook": "^10.5.8",
+    "typescript": "^5.9.3"
+  }
+}
