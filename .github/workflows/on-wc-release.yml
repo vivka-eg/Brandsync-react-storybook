@@ -1,0 +1,56 @@
+name: Scaffold stories for newly-released components
+
+# Triggered by Brandsync-web-components' release.yml, right after it actually publishes a new
+# version of @brandsync/react (not on every push there -- only on a real publish). See that repo's
+# release.yml for the repository_dispatch call this responds to.
+on:
+  repository_dispatch:
+    types: [wc-published]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm install @brandsync/react@latest
+      # Diffs @brandsync/react's exported component names against which src/stories/*.stories.tsx
+      # already exist, and writes a minimal boilerplate stub for anything missing. Deliberately
+      # NOT full story authoring -- see the script's own header comment for why, and what it does
+      # and doesn't attempt.
+      - run: node scripts/scaffold-new-stories.js
+
+      # If the script above found nothing new, `git status` is clean here and there's nothing to
+      # open a PR for -- checking this directly (rather than trying to pass a value out of the
+      # previous step) keeps this workflow's logic independent of GitHub Actions' own
+      # output-passing mechanics.
+      - name: Check for new story stubs
+        id: check
+        run: |
+          if [ -n "$(git status --porcelain src/stories/ package.json package-lock.json)" ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open PR with new story stubs
+        if: steps.check.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'Scaffold story stubs for newly-released components'
+          title: 'New component story stubs (needs a human pass)'
+          body: |
+            @brandsync/react published a new version with one or more components that didn't have
+            a story yet. This PR adds a minimal boilerplate stub for each (working props table +
+            default render via Storybook's `autodocs` tag) -- **it does not add realistic
+            args/variants**. See `BsButton.stories.tsx` for the pattern the real stories in this
+            repo follow, and flesh these out the same way before merging.
+          branch: scaffold-new-stories
+          delete-branch: true
