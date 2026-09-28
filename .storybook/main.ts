@@ -11,6 +11,10 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  // Serves public/ at the site root (e.g. public/brand-logo.svg -> /brand-logo.svg), so
+  // .storybook/manager.ts's brandImage can reference it as a plain absolute path in both
+  // `storybook dev` and `build-storybook`.
+  staticDirs: ['../public'],
 };
 
 export default config;

@@ -4,10 +4,23 @@ import { BsBadge } from '@brandsync/react';
 const meta: Meta<typeof BsBadge> = {
   title: 'Components/BsBadge',
   component: BsBadge,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A small status or category pill, usually paired with a label or list item.\n\n' +
+          '**When to use:** communicating a short, fixed status (e.g. "Active", "On leave") or category label.\n\n' +
+          '**When not to use:** as an interactive/clickable element — a badge is a label, not a control ' +
+          '(use a button or chip component if it needs to be clickable), or for long text — badges are sized ' +
+          'for one or two words.',
+      },
+    },
+  },
   argTypes: {
     variant: {
       control: 'select',
       options: ['default', 'primary', 'success', 'warning', 'info', 'error', 'neutral', 'inverse'],
+      description: 'Maps directly to the brandsync-tokens `--bs-badge-bg-*` / `--bs-badge-text-*` sets.',
     },
   },
   args: {
